@@ -1,0 +1,35 @@
+name: Setup pnpm
+description: Reduce boilerplate when installing setting up Node.js and installing pnpm dependencies.
+author: Mark Skelton
+branding:
+  icon: play
+  color: blue
+inputs:
+  flags:
+    description: Additional flags to pass to the install command.
+  pnpm-version:
+    description: pnpm version to use, defaults to the current version.
+    default: "7"
+  node-version:
+    description: Node version to use, defaults to the current LTS version.
+    default: "18.x"
+  ref:
+    description: Git ref to checkout. Passed to `actions/checkout`.
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ inputs.ref }}
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: ${{ inputs.pnpm-version }}
+    - name: Setup Node ${{ inputs.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: pnpm
+    - name: Install pnpm dependencies
+      shell: bash
+      run: pnpm install ${{ inputs.flags }}
