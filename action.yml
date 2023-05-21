@@ -9,18 +9,21 @@ inputs:
     description: Additional flags to pass to the install command.
   pnpm-version:
     description: pnpm version to use, defaults to the current version.
-    default: "7"
+    default: "8"
   node-version:
     description: Node version to use, defaults to the current LTS version.
     default: "18.x"
   ref:
     description: Git ref to checkout. Passed to `actions/checkout`.
+  fetch-depth:
+    description: Fetch depth of the checkout. Passed to `actions/checkout`.
 runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
       with:
         ref: ${{ inputs.ref }}
+        fetch-depth: ${{ inputs.fetch-depth }}
     - name: Setup pnpm
       uses: pnpm/action-setup@v2
       with:
