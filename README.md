@@ -33,6 +33,14 @@ Reduce boilerplate when installing setting up Node.js and installing
    fetch-depth: 0
 ```
 
+## Setup for publishing
+
+```yaml
+- uses: mskelton/setup-pnpm@v2
+  with:
+    registry-url: https://registry.npmjs.org/
+```
+
 ## Pass additional flags to the install command
 
 ```yaml
