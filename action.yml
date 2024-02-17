@@ -12,7 +12,7 @@ inputs:
     default: "8"
   node-version:
     description: Node version to use, defaults to the current LTS version.
-    default: "18.x"
+    default: "20.x"
   ref:
     description: Git ref to checkout. Passed to `actions/checkout`.
   fetch-depth:
@@ -31,7 +31,7 @@ runs:
       with:
         version: ${{ inputs.pnpm-version }}
     - name: Setup Node ${{ inputs.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
         registry-url: ${{ inputs.registry-url }}
