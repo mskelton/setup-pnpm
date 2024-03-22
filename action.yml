@@ -27,7 +27,7 @@ runs:
         ref: ${{ inputs.ref }}
         fetch-depth: ${{ inputs.fetch-depth }}
     - name: Setup pnpm
-      uses: pnpm/action-setup@v2
+      uses: pnpm/action-setup@v3
       with:
         version: ${{ inputs.pnpm-version }}
     - name: Setup Node ${{ inputs.node-version }}
