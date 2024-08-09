@@ -28,7 +28,6 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         registry-url: ${{ inputs.registry-url }}
-        cache: pnpm
     - name: Enable corepack
       shell: bash
       run: corepack enable
