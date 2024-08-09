@@ -7,9 +7,6 @@ branding:
 inputs:
   flags:
     description: Additional flags to pass to the install command.
-  pnpm-version:
-    description: pnpm version to use, defaults to the current version.
-    default: "8"
   node-version:
     description: Node version to use, defaults to the current LTS version.
     default: "20.x"
@@ -26,16 +23,15 @@ runs:
       with:
         ref: ${{ inputs.ref }}
         fetch-depth: ${{ inputs.fetch-depth }}
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v3
-      with:
-        version: ${{ inputs.pnpm-version }}
     - name: Setup Node ${{ inputs.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
         registry-url: ${{ inputs.registry-url }}
         cache: pnpm
+    - name: Enable corepack
+      shell: bash
+      run: corepack enable
     - name: Install pnpm dependencies
       shell: bash
       run: pnpm install ${{ inputs.flags }}
